@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+    {% extends 'base.html' %}
+  <title>Todo List</title>
+  {% block styles %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/Todo-list/Todo-list.css' %}">
+  {% endblock %}
+
+</head>
+<body>
+{% block content %}
+<div class="todo-list-conatiner">
+  <h2 class="h2">Welcome, {{ user.username }}!</h2>
+  <form method="POST" action="{% url 'todo_list' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="add-btn">Add Task</button>
+  </form>
+
+  <ul>
+    {% for task in tasks %}
+      <li>
+        {{ task.title }}
+        <a href="{% url 'delete_task' task.id %}">Delete</a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}
+</div>
+</body>
+</html>

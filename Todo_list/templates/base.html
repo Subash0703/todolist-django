@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <title>My To-Do List</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/Base/Base.css' %}"/>
+</head>
+<body>
+  <div class="base-container">
+    {% if user.is_authenticated %}
+    <div class="base-logo">
+      <a href="{% url 'todo_list' %}" class="todo-logo">My To-Do List</a><br><br>
+    </div>
+    <div class="base-btn">
+      <a href="{% url 'login' %}"><button class="base-btn-login">Login</button></a>
+      <a href="{% url 'register' %}"><button class="base-btn-create">Create Account</button></a>
+    </div>
+    {% endif %}
+  </div>
+  <hr>
+  {% block content %}{% endblock %}
+</body>
+</html>
