@@ -1,14 +1,12 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.views import LoginView
-from django.contrib.auth.views import LogoutView
+from django.contrib.auth.views import LoginView, LogoutView
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
 from .models import Task
 from .forms import TaskForm
-
 
 class CustomLoginView(LoginView):
     template_name = 'registration/login.html'
@@ -16,10 +14,8 @@ class CustomLoginView(LoginView):
     def get_success_url(self):
         return reverse_lazy('todo_list')
 
-
 class CustomLogoutView(LogoutView):
-    template_name = 'registration/logout.html'
-
+    template_name = 'logout/logout.html'
 
 class CustomRegisterView(CreateView):
     form_class = UserCreationForm
@@ -33,7 +29,6 @@ class CustomRegisterView(CreateView):
         user = authenticate(username=username, password=password)
         login(self.request, user)
         return response
-
 
 @login_required(login_url='login')
 def todo_list(request):
@@ -51,10 +46,8 @@ def todo_list(request):
     context = {'tasks': tasks, 'form': form}
     return render(request, 'todo_list.html', context)
 
-
 @login_required(login_url='login')
 def delete_task(request, id):
-    task = Task.objects.get(id=id)
+    task = get_object_or_404(Task, id=id)
     task.delete()
     return redirect('todo_list')
-

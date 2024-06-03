@@ -22,12 +22,11 @@ from django.urls import path
 from .views import todo_list, delete_task, CustomLoginView, CustomLogoutView, CustomRegisterView
 
 urlpatterns = [
-    path('', todo_list, name='todo_list'),
+    path('', CustomRegisterView.as_view(), name='register'),
+    path('todolist/', todo_list, name='todo_list'),
     path('delete/<str:id>/', delete_task, name='delete_task'),
     path('login/', CustomLoginView.as_view(), name='login'),
     path('logout/', CustomLogoutView.as_view(), name='logout'),
-    path('register/', CustomRegisterView.as_view(), name='register'),
-
 ]
 
 if settings.DEBUG:

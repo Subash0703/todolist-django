@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="UTF-8">
     {% extends 'base.html' %}
     <title>Register</title>
+    {% block styles %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/register/register.css' %}">
+    {% endblock %}
 </head>
 <body>
 {% block content %}
-  <h2>Register</h2>
-  <form method="post" action="{% url 'register' %}">
+<h2>Register</h2>
+<form method="post" action="{% url 'register' %}">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Register</button>
-  </form>
+    <button type="submit" class="btn-register">Register</button><br /><br /><br />
+</form>
 {% endblock %}
 </body>
 </html>

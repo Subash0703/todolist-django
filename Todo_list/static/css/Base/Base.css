@@ -31,6 +31,10 @@ p{
   border-radius: 20px;
   margin-bottom: 10px;
 }
+.base-btn-login:hover,
+.base-btn-create:hover{
+   cursor: pointer;
+}
 
 .todo-list-container {
   background-color: #fff;
@@ -73,6 +77,7 @@ input {
 .add-btn:hover,
 .login-btn:hover {
   background-color: #45a049;
+  cursor: pointer;
 }
 
 ul {
